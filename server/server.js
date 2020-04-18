@@ -24,6 +24,7 @@ app.get('/api/test', (req, res) => {
   fetch(testUrl)
   .then(response => response.json())
   .then(result => res.json(result))
+  .then(() => console.log('response sent'))
   .catch(error => {
     console.log(error);
   })
