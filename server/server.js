@@ -27,7 +27,11 @@ app.get('/api/greeting', (req, res) => {
 });
 
 app.get('/api/test', (req, res) => {
-  const testUrl = `https://trefle.io/api/plants/177444?token=${process.env.TOKEN}`;
+  // TODO: Remove hardcoded value 'weeping+willow' from URL. only hardcoded to make sure that my search is triggering an API call.
+  const testPlantName = 'weeping+willow'
+  // TODO: Figure out how to send a variable saving user input to the server
+  const testUrl = `https://trefle.io/api/plants?q=${testPlantName}&token=${process.env.TOKEN}`;
+
   fetch(testUrl)
   .then(response => response.json())
   .then(result => res.json(result))
