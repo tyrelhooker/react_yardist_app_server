@@ -1,9 +1,12 @@
 import React, { useState, useEffect} from 'react';
 import SearchPlantForm from './components/SearchPlantForm';
+import SearchResultPlants from './components/SearchResultPlants';
 import './App.css';
 
+// TODO: Reconfigure app to use localStorage to set myPlants
 function App() {
-  const [plants, setPlants] = useState({ myPlants: []});
+  const [plants, setPlants] = useState([]);
+  // TODO: Create myPlants to hold saved plants from the API call
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setErrors] = useState(null);
 
@@ -12,9 +15,9 @@ function App() {
     .then(result => result.json())
     .then(
       (result) => {
-        // console.log(result.main_species)
+        console.log(result)
         setIsLoaded(true);
-        setPlants({ myPlants: [result.main_species] }); 
+        setPlants(result); 
       },
       (error) => {
         setIsLoaded(true);
@@ -28,6 +31,7 @@ function App() {
   return (
     <div className='App'>
       <SearchPlantForm onNewPlantFetch={fetchData} />
+      <SearchResultPlants fetchedPlants={plants} />
     </div>
   )
 
