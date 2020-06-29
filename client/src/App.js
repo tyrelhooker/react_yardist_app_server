@@ -10,8 +10,14 @@ function App() {
   const [isLoaded, setIsLoaded] = useState(false);
   const [error, setErrors] = useState(null);
 
-  const fetchData = async () => {
-    const result = await fetch("/api/test")
+  const fetchData = async (plantNameInput) => {
+    console.log(plantNameInput);
+    // const plantName = plantNameInput;
+    
+    // console.log({plantName})
+    // http://localhost:8080
+    const url = `/api/plantName/${plantNameInput}`;
+    const result = await fetch(url)
     .then(result => result.json())
     .then(
       (result) => {

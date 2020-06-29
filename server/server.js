@@ -20,19 +20,14 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.listen(process.env.PORT, () => console.log(`Server is listening on port: ${process.env.PORT}`));
 
-app.get('/api/greeting', (req, res) => {
-  const name = req.query.name || 'World';
-  res.setHeader('Content-Type', 'application/json');
-  res.send(JSON.stringify({ greeting: `Hello ${name}!` }));
-});
+app.get('/api/plantName/:plantNameInput', (req, res) => {
+  // Trims and saves the trailing param from client side, which is the user's plant name search variable. 
+  let plantName = req.params.plantNameInput.trim();
+  
+  // Constructs the api url from user's plant name search and hidden api token
+  const trefleUrl = `https://trefle.io/api/plants?q=${plantName}&token=${process.env.TOKEN}`;
 
-app.get('/api/test', (req, res) => {
-  // TODO: Remove hardcoded value 'weeping+willow' from URL. only hardcoded to make sure that my search is triggering an API call.
-  const testPlantName = 'weeping+willow'
-  // TODO: Figure out how to send a variable saving user input to the server
-  const testUrl = `https://trefle.io/api/plants?q=${testPlantName}&token=${process.env.TOKEN}`;
-
-  fetch(testUrl)
+  fetch(trefleUrl)
   .then(response => response.json())
   .then(result => res.json(result))
   .then(() => console.log('response sent'))
