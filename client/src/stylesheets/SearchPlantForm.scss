@@ -1,0 +1,20 @@
+@import "globals";
+
+
+
+form.search-plant {
+  width: 100%;
+  display: flex;
+  font-size: 14pt;
+  // text-align: center;
+  // margin: 100px;
+}
+
+input, button {
+  margin: 5px;
+  padding: 3px;
+  font-size: 14pt;
+  border-radius: 5px;
+  // text-align: center;
+}
+

@@ -1,4 +1,5 @@
 import React from 'react';
+import '../stylesheets/SearchResultPlants.scss';
 
 const SearchResultPlants = ({ fetchedPlants }) => {
   // console.log(fetchedPlants);

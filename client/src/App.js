@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from 'react';
 import SearchPlantForm from './components/SearchPlantForm';
 import SearchResultPlants from './components/SearchResultPlants';
-import './App.css';
+import './stylesheets/App.scss';
 
 // TODO: Reconfigure app to use localStorage to set myPlants
 function App() {
@@ -12,11 +12,8 @@ function App() {
 
   const fetchData = async (plantNameInput) => {
     console.log(plantNameInput);
-    // const plantName = plantNameInput;
-    
-    // console.log({plantName})
-    // http://localhost:8080
     const url = `/api/plantName/${plantNameInput}`;
+    
     const result = await fetch(url)
     .then(result => result.json())
     .then(
@@ -28,10 +25,8 @@ function App() {
       (error) => {
         setIsLoaded(true);
         setErrors(error);
-        // console.log(error);
       }
     )
-    // .then(() => console.log(isLoaded))
   }
 
   return (
@@ -40,46 +35,6 @@ function App() {
       <SearchResultPlants fetchedPlants={plants} />
     </div>
   )
-
-  // useEffect(() => {
-  //   fetchData();
-  //   // .then(() => {
-  //   //   console.log(isLoaded)
-  //   //   console.log(plants)})
-  //   }, []);
-
-
-  // if (error) {
-  //   return <div>Error: {error.message}</div>
-  // } else if (!isLoaded) {
-  //   return <div>Loading...</div>
-  // } else {
-  //   return (
-  //     <div>
-  //       {console.log(plants.myPlants.map((item) => item))}
-  //       <ul>
-  //         {plants.myPlants.map((item) => 
-  //           <li key={item.id}>
-  //             {item.common_name}
-
-  //             <ul>
-  //               {Object.entries(item.specifications).map(([name, value]) => 
-  //                   // {console.log([name, value])}
-  //                 <li key={item.id}>
-  //                   {( value === null || typeof value !== 'object' ) ?
-  //                   `${name} :  ${value}` : `${name} : ${value.ft}`}
-  //                 </li>
-  //               )}
-  //             </ul>
-              
-  //           </li>
-  //         )}
-  //       </ul>
-  //     </div>
-  //   );
-  // }
-
-
 }
 
 export default App;
